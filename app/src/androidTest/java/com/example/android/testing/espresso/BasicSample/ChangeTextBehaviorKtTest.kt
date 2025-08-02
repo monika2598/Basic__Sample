@@ -39,6 +39,21 @@ class ChangeTextBehaviorKtTest {
     }
 
     @Test
+    fun testChangeTextWithEmpty() {
+        onView(withId(R.id.editTextUserInput)).perform(clearText(), closeSoftKeyboard())
+        onView(withId(R.id.changeTextBt)).perform(click())
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("")))
+    }
+
+    @Test
+    fun testOpenActivityWithEmpty() {
+        onView(withId(R.id.editTextUserInput)).perform(clearText(), closeSoftKeyboard())
+        onView(withId(R.id.activityChangeTextBtn)).perform(click())
+        onView(isRoot()).perform(waitFor(500))
+        onView(withId(R.id.show_text_view)).check(matches(withText("")))
+    }
+
+    @Test
     fun testChangeTextWithAbcdef() {
         onView(withId(R.id.editTextUserInput)).perform(typeText("abcdef"), closeSoftKeyboard())
         onView(withId(R.id.changeTextBt)).perform(click())
@@ -52,14 +67,6 @@ class ChangeTextBehaviorKtTest {
         onView(isRoot()).perform(waitFor(500))
         onView(withId(R.id.show_text_view)).check(matches(withText("abcdef")))
     }
-
-    @Test
-    fun testChangeTextWithEmpty() {
-        onView(withId(R.id.editTextUserInput)).perform(clearText(), closeSoftKeyboard())
-        onView(withId(R.id.changeTextBt)).perform(click())
-        onView(withId(R.id.textToBeChanged)).check(matches(withText("")))
-    }
-
 
     // Optional: replaces Thread.sleep
     private fun waitFor(delay: Long): ViewAction {
