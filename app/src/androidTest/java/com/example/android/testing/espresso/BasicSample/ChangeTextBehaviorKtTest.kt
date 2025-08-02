@@ -53,6 +53,14 @@ class ChangeTextBehaviorKtTest {
         onView(withId(R.id.show_text_view)).check(matches(withText("abcdef")))
     }
 
+    @Test
+    fun testChangeTextWithEmpty() {
+        onView(withId(R.id.editTextUserInput)).perform(clearText(), closeSoftKeyboard())
+        onView(withId(R.id.changeTextBt)).perform(click())
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("")))
+    }
+
+
     // Optional: replaces Thread.sleep
     private fun waitFor(delay: Long): ViewAction {
         return object : ViewAction {
